@@ -7,18 +7,21 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.util.concurrent.TimeUnit;
+
 public class BaseTest {
-    protected WebDriver driver;
+    public WebDriver driver;
 
     @BeforeMethod
     public void setUpBase(){
         initializeDriver("chrome");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("https://selenium-practice-app.herokuapp.com/?#/home");
     }
 
     @AfterMethod
     public void tearDown(){
-        driver.close();
+        driver.quit();
     }
 
     public void initializeDriver(String browserType){

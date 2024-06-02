@@ -7,13 +7,16 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.UserMgtPage;
 
 import java.util.List;
 
 public class UserMgtPageTest extends BaseTest{
+    private UserMgtPage page;
 
     @BeforeMethod
     public void setUp(){
+        page = new UserMgtPage(driver);
         driver.findElement(By.xpath("//nav/a[text()='User-Mgt']")).click();
     }
 
@@ -31,12 +34,12 @@ public class UserMgtPageTest extends BaseTest{
         String phone = faker.phoneNumber().cellPhone();
         String email = first + "." + last + "@test.com";
 
-        driver.findElement(By.id("Firstname")).sendKeys(first);
-        driver.findElement(By.id("Lastname")).sendKeys(last);
-        driver.findElement(By.id("Phonenumber")).sendKeys(phone);
-        driver.findElement(By.id("Email")).sendKeys(email);
-        driver.findElement(By.id("Select-role")).sendKeys(role);
-        driver.findElement(By.id("submit-btn")).click();
+        page.firstName.sendKeys(first);
+        page.lastName.sendKeys(last);
+        page.phoneNumber.sendKeys(phone);
+        page.email.sendKeys(email);
+        page.role.sendKeys(role);
+        page.submitTableBtn.click();
 
         Assert.assertEquals(driver.findElement(By.xpath("//td[1]")).getText(), first);
         Assert.assertEquals(driver.findElement(By.xpath("//td[2]")).getText(), last);
