@@ -34,12 +34,13 @@ public class UserMgtPageTest extends BaseTest{
         String phone = faker.phoneNumber().cellPhone();
         String email = first + "." + last + "@test.com";
 
-        page.firstName.sendKeys(first);
-        page.lastName.sendKeys(last);
-        page.phoneNumber.sendKeys(phone);
-        page.email.sendKeys(email);
-        page.role.sendKeys(role);
-        page.submitTableBtn.click();
+//        page.firstName.sendKeys(first);
+//        page.lastName.sendKeys(last);
+//        page.phoneNumber.sendKeys(phone);
+//        page.email.sendKeys(email);
+//        page.role.sendKeys(role);
+//        page.submitTableBtn.click();
+        page.fillOutNewUserRegistrationForm(first, last, phone, email, role);
 
         Assert.assertEquals(driver.findElement(By.xpath("//td[1]")).getText(), first);
         Assert.assertEquals(driver.findElement(By.xpath("//td[2]")).getText(), last);

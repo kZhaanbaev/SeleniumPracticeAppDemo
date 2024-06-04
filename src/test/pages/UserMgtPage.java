@@ -56,6 +56,16 @@ public class UserMgtPage {
 
     @FindBy(id = "submit-table-btn")
     public WebElement submitTableBtn;
+
+    public void fillOutNewUserRegistrationForm(String first, String last, String phone, String emailAddress, String userRole){
+        firstName.sendKeys(first);
+        lastName.sendKeys(last);
+        phoneNumber.sendKeys(phone);
+        email.sendKeys(emailAddress);
+        role.sendKeys(userRole);
+        submitTableBtn.click();
+    }
+
 }
 
 
