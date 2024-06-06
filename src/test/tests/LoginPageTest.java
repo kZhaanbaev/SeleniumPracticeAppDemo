@@ -1,5 +1,6 @@
 package tests;
 
+import data.pojos.ExistingUser;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -27,7 +28,8 @@ public class LoginPageTest extends BaseTest{
 //        driver.findElement(By.name("username")).sendKeys("john.snow@north.com");
 //        driver.findElement(By.name("password")).sendKeys("john.snow$");
 //        driver.findElement(By.tagName("button")).click();
-        page.login("john.snow@north.com", "john.snow$");
+        ExistingUser user = new ExistingUser("john.snow@north.com", "john.snow$");
+        page.login(user.getUsername(), user.getPassword());
         Assert.assertEquals(driver.getCurrentUrl(), "https://selenium-practice-app.herokuapp.com/?#/user");
     }
 }
