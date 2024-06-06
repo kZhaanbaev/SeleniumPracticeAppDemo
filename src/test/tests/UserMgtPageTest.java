@@ -1,6 +1,7 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import data.pojos.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -29,23 +30,20 @@ public class UserMgtPageTest extends BaseTest{
     @Test(testName = "US1010: Staging table view", dataProvider = "roles")
     public void test010(String role){
         Faker faker = new Faker();
-        String first = faker.name().firstName();
-        String last = faker.name().lastName();
-        String phone = faker.phoneNumber().cellPhone();
-        String email = first + "." + last + "@test.com";
+        User user = new User(
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.phoneNumber().cellPhone(),
+                "test@test.com",
+                role
+        );
 
-//        page.firstName.sendKeys(first);
-//        page.lastName.sendKeys(last);
-//        page.phoneNumber.sendKeys(phone);
-//        page.email.sendKeys(email);
-//        page.role.sendKeys(role);
-//        page.submitTableBtn.click();
-        page.fillOutNewUserRegistrationForm(first, last, phone, email, role);
+        page.fillOutNewUserRegistrationForm(user.getFirstName(), user.getLastName(), user.getPhone(), user.getEmail(), role);
 
-        Assert.assertEquals(driver.findElement(By.xpath("//td[1]")).getText(), first);
-        Assert.assertEquals(driver.findElement(By.xpath("//td[2]")).getText(), last);
-        Assert.assertEquals(driver.findElement(By.xpath("//td[3]")).getText(), phone);
-        Assert.assertEquals(driver.findElement(By.xpath("//td[4]")).getText(), email);
+        Assert.assertEquals(driver.findElement(By.xpath("//td[1]")).getText(), user.getFirstName());
+        Assert.assertEquals(driver.findElement(By.xpath("//td[2]")).getText(), user.getLastName());
+        Assert.assertEquals(driver.findElement(By.xpath("//td[3]")).getText(), user.getPhone());
+        Assert.assertEquals(driver.findElement(By.xpath("//td[4]")).getText(), user.getEmail());
         Assert.assertEquals(driver.findElement(By.xpath("//td[5]")).getText(), role);
     }
 

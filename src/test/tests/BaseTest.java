@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import utils.ConfigReader;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,7 +17,7 @@ public class BaseTest {
     public void setUpBase(){
         initializeDriver("chrome");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("https://selenium-practice-app.herokuapp.com/?#/home");
+        driver.get(ConfigReader.readProperty("config.properties", "url"));
     }
 
     @AfterMethod
