@@ -5,11 +5,13 @@ import data.pojos.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.UserMgtPage;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class UserMgtPageTest extends BaseTest{
@@ -37,6 +39,8 @@ public class UserMgtPageTest extends BaseTest{
                 "test@test.com",
                 role
         );
+
+        report.logInfo(user);
 
         page.fillOutNewUserRegistrationForm(user.getFirstName(), user.getLastName(), user.getPhone(), user.getEmail(), role);
 
@@ -74,6 +78,10 @@ public class UserMgtPageTest extends BaseTest{
 
     @Test(testName = "US1012: Adding user to DB", dataProvider = "roles")
     public void test05(String role){
+
+
+
+
         driver.findElement(By.id("Firstname")).sendKeys("John");
         driver.findElement(By.id("Lastname")).sendKeys("Smith");
         driver.findElement(By.id("Phonenumber")).sendKeys("123-456-7890");

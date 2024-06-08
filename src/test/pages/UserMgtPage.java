@@ -18,7 +18,7 @@ public class UserMgtPage {
     @FindBy(id = "Lastname")
     public WebElement lastName;
 
-    @FindBy(id = "Phone")
+    @FindBy(id = "Phonenumber")
     public WebElement phoneNumber;
 
     @FindBy(id = "Email")
@@ -66,7 +66,7 @@ public class UserMgtPage {
         phoneNumber.sendKeys(phone);
         email.sendKeys(emailAddress);
         role.sendKeys(userRole);
-        submitTableBtn.click();
+        userMgtSubmitBtn.click();
     }
 
 }
