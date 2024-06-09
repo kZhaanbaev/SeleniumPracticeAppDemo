@@ -40,6 +40,7 @@ public class UserMgtPageTest extends BaseTest{
                 role
         );
 
+        report.logInfo("Used Test data User:");
         report.logInfo(user);
 
         page.fillOutNewUserRegistrationForm(user.getFirstName(), user.getLastName(), user.getPhone(), user.getEmail(), role);
@@ -70,6 +71,7 @@ public class UserMgtPageTest extends BaseTest{
 
         //validate user email doesn't exist
         String xpath = "//td[text()='j.smith@test.com']";
+        report.logInfo(xpath);
 
         //using list to avoid NoSuchElementException, which would stop the execution and not reach Assertion
         List<WebElement> elementList = driver.findElements(By.xpath(xpath));
@@ -78,10 +80,6 @@ public class UserMgtPageTest extends BaseTest{
 
     @Test(testName = "US1012: Adding user to DB", dataProvider = "roles")
     public void test05(String role){
-
-
-
-
         driver.findElement(By.id("Firstname")).sendKeys("John");
         driver.findElement(By.id("Lastname")).sendKeys("Smith");
         driver.findElement(By.id("Phonenumber")).sendKeys("123-456-7890");
@@ -92,6 +90,7 @@ public class UserMgtPageTest extends BaseTest{
         //submitting table to db
         driver.findElement(By.id("submit-table-btn")).click();
 
+        report.logInfo("Validating table contains email: j.smith@test.com");
         //validating table contains new email
     }
 

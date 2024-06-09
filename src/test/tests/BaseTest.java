@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeSuite;
 import utils.ConfigReader;
 import utils.Report;
 
+import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
@@ -21,17 +22,17 @@ public class BaseTest {
     public ExtentTest testReport;
 
     @BeforeMethod
-    public void setUpBase(){
+    public void setUpBase(Method method){
         initializeDriver("chrome");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get(ConfigReader.readProperty("config.properties", "url"));
-        testReport = report.createTestReport(driver);
+        testReport = report.createTestReport(driver, method);
     }
 
     @AfterMethod
     public void tearDown(ITestResult result){
-        driver.quit();
         report.logTestResult(result);
+        driver.quit();
     }
 
     public void initializeDriver(String browserType){
