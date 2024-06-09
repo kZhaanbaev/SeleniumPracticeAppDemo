@@ -46,7 +46,7 @@ public class Report {
     }
 
     public void logScreenshot(String title){
-        extentTest.pass(title, MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.takeScreenshot(driver)).build());
+        extentTest.info(title, MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.takeScreenshot(driver)).build());
     }
 
     public void logTestResult(ITestResult result){
